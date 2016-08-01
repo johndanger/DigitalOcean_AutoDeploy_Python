@@ -6,7 +6,7 @@
 # 1) Run apt-get update and apt-get upgrade to get system up to date
 # 2) Create a new user, and set the password
 # 3) Copy local public key to server under new users home dir
-# 4) Configure SSH to disallow root login, listen on port user specified port, disable plaintext password logon.
+# 4) Configure SSH to disallow root login, listen on user specified port, disable plaintext password logon.
 # 5) Configure UFW to allow only connections to user specified ssh port
 # 6) Configure automatic security updates
 # 7) Maybe more in the future?
@@ -119,7 +119,6 @@ def genserverinfofile():
     outputfile.write('root: %s \n' % password)
     outputfile.write('%s: %s \n' % (boxusername, userpassword))
     print 'Box setup complete, connect using: ssh -p ' + ssh_port + ' ' + boxusername + '@' + droplet_ip
-
 
 def main():
     manager = digitalocean.Manager(token=doapi_key)
