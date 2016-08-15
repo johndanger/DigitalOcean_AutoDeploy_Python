@@ -96,7 +96,10 @@ def deploy(hoststring):
 
     def ufwconfig():
         print "Enabling UFW and adding exception for ssh port..."
-        run('ufw allow %s/tcp' % ssh_port)
+        if ssh_port == None:
+            run('ufw allow 22/tcp')
+        else:
+            run('ufw allow %s/tcp' % ssh_port)
         run('ufw --force enable')
 
     def unattendedupgrades():
