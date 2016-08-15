@@ -89,7 +89,8 @@ def deploy(hoststring):
 
     def sshconfig():
         print "Disabling root login, disabling password authentication and changing listening port of OpenSSH Daemon..."
-        sed('/etc/ssh/sshd_config', 'Port 22', 'Port ' + ssh_port)
+        if ssh_port != None:
+            sed('/etc/ssh/sshd_config', 'Port 22', 'Port ' + ssh_port)
         sed('/etc/ssh/sshd_config', '#PasswordAuthentication yes', 'PasswordAuthentication no')
         sed('/etc/ssh/sshd_config', 'PermitRootLogin yes', 'PermitRootLogin no')
         run('service ssh restart')
